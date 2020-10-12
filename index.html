@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid Cheat Sheet</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>CSS Grid Cheet Sheet</h1>
+    <section id="introduction" class="">
+      <h2>Introduction to CSS Grid</h2>
+      <aside>
+        I have respectfully sourced the following material from
+        <a
+          href="https://css-tricks.com/snippets/css/complete-guide-grid/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >css-tricks.com</a
+        >
+        under fair use for the educational purpose of completing the
+        <a
+          href="https://www.codecademy.com/practice/projects/independent-project-html-documentation"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Codecademy HTML and CSS challenge project</a
+        >. I have also implemented the examples with code instead of images.
+      </aside>
+      <p>
+        CSS Grid Layout is the most powerful layout system available in CSS. It
+        is a 2-dimensional system, meaning it can handle both columns and rows,
+        unlike flexbox which is largely a 1-dimensional system. You work with
+        Grid Layout by applying CSS rules both to a parent element (which
+        becomes the Grid Container) and to that element’s children (which become
+        Grid Items).
+      </p>
+      <p>
+        To get started you have to define a container element as a grid with
+        <span class="code">display: grid</span>, set the column and row sizes
+        with <span class="code">grid-template-columns</span> and
+        <span class="code">grid-template-rows</span>, and then place its child
+        elements into the grid with <span class="code">grid-column</span> and
+        <span class="code">grid-row</span>. Similarly to flexbox, the source
+        order of the grid items doesn’t matter. Your CSS can place them in any
+        order, which makes it super easy to rearrange your grid with media
+        queries. Imagine defining the layout of your entire page, and then
+        completely rearranging it to accommodate a different screen width all
+        with only a couple lines of CSS. Grid is one of the most powerful CSS
+        modules ever introduced.
+      </p>
+    </section>
+    <section id="basics">
+      <h2>The basics</h2>
+      <p>
+        Before diving into the concepts of Grid it’s important to understand the
+        terminology. Since the terms involved here are all kinda conceptually
+        similar, it’s easy to confuse them with one another if you don’t first
+        memorize their meanings defined by the Grid specification. But don’t
+        worry, there aren’t many of them.
+      </p>
+      <article>
+        <h3>Grid Container</h3>
+        <p>
+          The element on which <span class="code">display: grid</span> is
+          applied. It’s the direct parent of all the grid items. In this example
+          <span class="code">container</span> is the grid container.
+        </p>
+        <code>
+          <span class="b">&lt;div</span> <span class="gr">class=</span
+          ><span class="y">"container"</span><span class="b">&gt;</span><br />
+          <span class="b">&nbsp;&nbsp;&lt;div</span>
+          <span class="gr">class=</span><span class="y">"item item-1"</span
+          ><span class="b">&gt; &lt;/div&gt;</span><br />
+          <span class="b">&nbsp;&nbsp;&lt;div</span>
+          <span class="gr">class=</span><span class="y">"item item-2"</span
+          ><span class="b">&gt; &lt;/div&gt;</span><br />
+          <span class="b">&nbsp;&nbsp;&lt;div</span>
+          <span class="gr">class=</span><span class="y">"item item-3"</span
+          ><span class="b">&gt; &lt;/div&gt;</span><br />
+          <span class="b">&lt;/div&gt;</span>
+        </code>
+      </article>
+      <article>
+        <h3>Grid Line</h3>
+        <p>
+          The dividing lines that make up the structure of the grid. They can be
+          either vertical (“column grid lines”) or horizontal (“row grid lines”)
+          and reside on either side of a row or column. Here the yellow line is
+          an example of a column grid line.
+        </p>
+        <figure>
+          <div class="grid">
+            <div class="item">Item 1</div>
+            <div class="item br">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item">Item 4</div>
+            <div class="item br">Item 5</div>
+            <div class="item">Item 6</div>
+          </div>
+        </figure>
+      </article>
+      <article>
+        <h3>Grid Track</h3>
+        <p>
+          The space between two adjacent grid lines. You can think of them like
+          the columns or rows of the grid. Here’s the grid track between the
+          second and third row grid lines.
+        </p>
+        <figure>
+          <div class="grid">
+            <div class="item">Item 1</div>
+            <div class="item">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item go">Item 4</div>
+            <div class="item go">Item 5</div>
+            <div class="item go">Item 6</div>
+          </div>
+        </figure>
+      </article>
+      <article>
+        <h3>Grid Area</h3>
+        <p>
+          The total space surrounded by four grid lines. A grid area may be
+          composed of any number of grid cells. Here’s the grid area between row
+          grid lines 1 and 3, and column grid lines 1 and 3.
+        </p>
+        <figure>
+          <div class="grid">
+            <div class="item go">Item 1</div>
+            <div class="item go">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item go">Item 4</div>
+            <div class="item go">Item 5</div>
+            <div class="item">Item 6</div>
+          </div>
+        </figure>
+      </article>
+      <article>
+        <h3>Grid Item</h3>
+        <p>
+          The children (i.e. direct descendants) of the grid container. Here the
+          <span class="code">item</span> elements are grid items, but
+          <span class="code">sub-item</span> isn’t.
+        </p>
+        <code>
+          <span class="b">&lt;div</span> <span class="gr">class=</span
+          ><span class="y">"container"</span><span class="b">&gt;</span><br />
+          <span class="b">&nbsp;&nbsp;&lt;div</span>
+          <span class="gr">class=</span><span class="y">"item"</span
+          ><span class="b">&gt; &lt;/div&gt;</span><br />
+          <span class="b">&nbsp;&nbsp;&lt;div</span>
+          <span class="gr">class=</span><span class="y">"item"</span
+          ><span class="b">&gt;</span><br />
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="b">&lt;p</span>
+          <span class="gr">class=</span><span class="y">"sub-item</span
+          ><span class="b">&gt; &lt;/p&gt;</span><br />
+          <span class="b">&nbsp;&nbsp;&lt;/div&gt;</span><br />
+          <span class="b">&nbsp;&nbsp;&lt;div</span>
+          <span class="gr">class=</span><span class="y">"item"</span
+          ><span class="b">&gt; &lt;/div&gt;</span><br />
+          <span class="b">&lt;/div&gt;</span>
+        </code>
+      </article>
+      <article>
+        <h3>Grid Cell</h3>
+        <p>
+          The space between two adjacent row and two adjacent column grid lines.
+          It’s a single “unit” of the grid. Here’s the grid cell between row
+          grid lines 1 and 2, and column grid lines 2 and 3.
+        </p>
+        <figure>
+          <div class="grid">
+            <div class="item">Item 1</div>
+            <div class="item go">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item">Item 4</div>
+            <div class="item">Item 5</div>
+            <div class="item">Item 6</div>
+          </div>
+        </figure>
+      </article>
+    </section>
+    <section id="important">
+      <h2>The Most Powerful Lines in Grid</h2>
+      <article>
+        <p>
+          Fluid width columns that break into more or less columns as space is
+          available, with no media queries!
+        </p>
+        <code>
+          <span class="b">.grid {</span><br />
+          &nbsp;&nbsp;<span class="gr">display:</span>
+          <span class="y">grid</span><span class="gr">;</span><br />
+          &nbsp;&nbsp;<span class="gr">grid-template-columns:</span>
+          <span class="y">repeat(auto-fill, minmax(min(10rem, 100%), 1fr))</span
+          ><span class="gr">;</span><br />
+          &nbsp;&nbsp;<span class="gr">grid-gap:</span>
+          <span class="y">1rem</span><span class="gr">;</span><br />
+          <span class="b">}</span>
+        </code>
+        <figure>
+          <div class="grid responsive">
+            <div class="item">Item 1</div>
+            <div class="item">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item">Item 4</div>
+            <div class="item">Item 5</div>
+            <div class="item go">Item 6</div>
+            <div class="item">Item 7</div>
+            <div class="item">Item 8</div>
+            <div class="item">Item 9</div>
+          </div>
+        </figure>
+      </article>
+    </section>
+    <section class="contents">
+      <h2>Contents</h2>
+      <div class="flex">
+        <div class="">
+          <h4>Properties for Grid Container</h4>
+          <ul>
+            <li><a href="#">link link link link link</a></li>
+            <li><a href="#">link link link link link</a></li>
+            <li><a href="#">link link link link link</a></li>
+            <li><a href="#">link link link link link</a></li>
+            <li><a href="#">link link link link link</a></li>
+          </ul>
+        </div>
+        <div class="">
+          <h4>Properties for Grid Items</h4>
+          <ul>
+            <li><a href="#">link link link link link</a></li>
+            <li><a href="#">link link link link link</a></li>
+            <li><a href="#">link link link link link</a></li>
+            <li><a href="#">link link link link link</a></li>
+            <li><a href="#">link link link link link</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
